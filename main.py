@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Optional
 
@@ -89,3 +90,6 @@ def delete_task(task_id: int):
             tasks.remove(task)
             return
     raise HTTPException(status_code=404, detail=f"Task {task_id} not found")
+
+
+app.mount("/app", StaticFiles(directory="static", html=True), name="static")

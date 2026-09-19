@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The QUEUE</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div id="bubbles"></div>
+
+  <main class="app">
+    <h1 class="logo">THE <span>QUEUE</span></h1>
+    <p class="subtitle">a minimal task queue</p>
+
+    <form id="task-form" class="task-form">
+      <input type="text" id="task-input" placeholder="Add a new task..." autocomplete="off" required>
+      <button type="submit">Add</button>
+    </form>
+
+    <div class="counter" id="counter">0 / 0 done</div>
+
+    <ul id="task-list" class="task-list"></ul>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
