@@ -68,10 +68,4 @@ Every endpoint above is also testable interactively at `/docs` — no curl requi
 
 ---
 
-## 📸 Preview
-
-A minimal dark interface — black background, mint grid lines, softly floating particles, and a live done/total counter.
-
----
-
 > 🚀 **The QUEUE — Simple. Fast. Organized.**
