@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
+from pydantic import BaseModel
 
 app = FastAPI(title="The QUEUE API", version="1.0")
 
@@ -15,11 +16,16 @@ async def http_exception_handler(request: Request, exc: HTTPException):
     return JSONResponse(status_code=exc.status_code, content={"error": exc.detail})
 
 
+class TaskCreate(BaseModel):
+    title: str
+
+
 tasks = [
     {"id": 1, "title": "Learn FastAPI", "done": False},
     {"id": 2, "title": "Build The QUEUE", "done": False},
     {"id": 3, "title": "Push to GitHub", "done": False},
 ]
+next_id = 4
 
 
 @app.get("/")
@@ -43,3 +49,14 @@ def get_task(task_id: int):
         if task["id"] == task_id:
             return task
     raise HTTPException(status_code=404, detail=f"Task {task_id} not found")
+
+
+@app.post("/tasks", status_code=201)
+def create_task(payload: TaskCreate):
+    global next_id
+    if not payload.title or not payload.title.strip():
+        raise HTTPException(status_code=400, detail="Title is required")
+    new_task = {"id": next_id, "title": payload.title.strip(), "done": False}
+    tasks.append(new_task)
+    next_id += 1
+    return new_task
